@@ -47,6 +47,7 @@ function generateValues( width ){
 function draw(){
 	const canvas = document.querySelector( 'canvas' );
 	const ctx = canvas.getContext( '2d' );
+	ctx.globalAlpha = 1.0;
 	const width = 3840;
 	const height = 2160;
 
