@@ -47,9 +47,10 @@ function generateValues( width ){
 function draw(){
 	const canvas = document.querySelector( 'canvas' );
 	const ctx = canvas.getContext( '2d' );
-	ctx.globalAlpha = 1.0;
-	const width = 3840;
-	const height = 2160;
+	const params = getDrawParams();
+	ctx.globalAlpha = params[ 'alpha' ] ?? 1.0;
+	const width = params[ 'width' ] ?? 3840;
+	const height = params[ 'height' ] ?? 2160;
 
 	const values = getDataFromUrl() ?? generateValues( width );
 	const {
@@ -92,6 +93,35 @@ function draw(){
 	}
 
 	setLinks( canvas.toDataURL(), encodeValues(values) );
+}
+
+/**
+ * Get update values for some variables/properties from the variable "wp_params".
+ * It checks each parameter types is expected one ("number", etc.).
+ */
+function getDrawParams(){
+	// key : name of variable/property in drow().
+	// value : Javascript type name ("number", etc.).
+	const map = {
+		'width' : 'number',
+		'height' : 'number',
+		'alpha' : 'number'
+	};
+
+	// "ret" use as return value
+	let ret = {};
+
+	for( let key in map ){
+		// Get a parameger value from "wp_params".
+		let param = wp_params[ key ];
+
+		// Set to "ret" when the parameter value is not null and is correct type.
+		if( ( param != null ) && ( typeof param == map[key] ) ){
+			ret[ key ] = wp_params[ key ];
+		}
+	}
+
+	return ret;
 }
 
 /**
