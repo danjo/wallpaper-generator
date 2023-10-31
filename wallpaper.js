@@ -112,7 +112,7 @@ function getDrawParams(){
 	let ret = {};
 
 	for( let key in map ){
-		// Get a parameger value from "wp_params".
+		// Get a parameter value from "wp_params".
 		let param = wp_params[ key ];
 
 		// Set to "ret" when the parameter value is not null and is correct type.
