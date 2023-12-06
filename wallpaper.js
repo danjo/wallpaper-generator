@@ -100,7 +100,7 @@ function draw(){
  * It checks each parameter types is expected one ("number", etc.).
  */
 function getDrawParams(){
-	// key : name of variable/property in drow().
+	// key : name of variable/property in draw().
 	// value : Javascript type name ("number", etc.).
 	const map = {
 		'width' : 'number',
